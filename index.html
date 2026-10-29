@@ -91,6 +91,13 @@
   .vid b { display: block; font-size: 14px; }
   .vid span { color: var(--muted); font-size: 12px; }
 
+  .soon { opacity: .7; cursor: default; }
+  .soon:hover { transform: none; }
+  .soon-tag {
+    display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; letter-spacing: .4px;
+    text-transform: uppercase; color: #ffd27a;
+  }
+
   footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 12px; }
 
   @media (max-width: 560px) {
@@ -169,6 +176,8 @@ const VIDEOS = [
 
 // Anything with a "show from" date stays hidden until that moment (scheduled releases).
 const isOut = from => !from || Date.now() >= Date.parse(from);
+const soonText = from => "Coming soon · " + new Date(from).toLocaleString(undefined,
+  { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
 
 const q = s => encodeURIComponent(s);
 const storeSearch = t => [
@@ -184,7 +193,7 @@ const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&
 document.getElementById("platforms").innerHTML = PLATFORMS.map(([n, c, u]) =>
   `<a class="pbtn" href="${u}" target="_blank" rel="noopener"><span class="dot" style="background:${c}"></span>${n}</a>`).join("");
 
-document.getElementById("releases").innerHTML = RELEASES.filter(r => isOut(r.from)).map(r => `
+document.getElementById("releases").innerHTML = RELEASES.map(r => isOut(r.from) ? `
   <div class="release">
     <img src="${r.cover}" alt="${esc(r.title)} cover" loading="lazy">
     <div>
@@ -195,13 +204,24 @@ document.getElementById("releases").innerHTML = RELEASES.filter(r => isOut(r.fro
       <div class="chips">${storeSearch(r.title).map(([n, u]) =>
         `<a class="chip" href="${u}" target="_blank" rel="noopener">${n}</a>`).join("")}</div>
     </div>
+  </div>` : `
+  <div class="release soon">
+    <img src="${r.cover}" alt="${esc(r.title)} cover" loading="lazy">
+    <div>
+      <h3>${esc(r.title)}</h3>
+      <div class="soon-tag">${soonText(r.from)}</div>
+    </div>
   </div>`).join("");
 
-document.getElementById("videos").innerHTML = VIDEOS.filter(v => isOut(v[3])).map(([t, id, note]) => `
+document.getElementById("videos").innerHTML = VIDEOS.map(([t, id, note, from]) => isOut(from) ? `
   <a class="vid" href="https://youtu.be/${id}" target="_blank" rel="noopener">
     <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy">
     <div><b>${esc(t)}</b><span>${esc(note)}</span></div>
-  </a>`).join("");
+  </a>` : `
+  <div class="vid soon">
+    <img src="img/thumb-${id}.jpg" alt="" loading="lazy">
+    <div><b>${esc(t)}</b><span class="soon-tag">${soonText(from)}</span></div>
+  </div>`).join("");
 </script>
 </body>
 </html>
