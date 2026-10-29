@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Samuraikid11 – Music</title>
+<meta name="description" content="Epic fantasy and anime story-songs by Samuraikid11. Listen on Spotify, Apple Music, YouTube Music, Amazon Music and more.">
+<meta property="og:title" content="Samuraikid11 – Music">
+<meta property="og:description" content="Epic fantasy and anime story-songs. Listen on every platform.">
+<meta property="og:image" content="https://samuraikid11.github.io/img/icon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07091a;
+    --panel: rgba(20, 24, 54, .72);
+    --line: rgba(120, 140, 255, .18);
+    --text: #eef0ff;
+    --muted: #a3a9d6;
+    --blue: #4f8bff;
+    --violet: #a46bff;
+    --pink: #ff7ab6;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--text); font: 15px/1.5 Inter, system-ui, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 50% -200px, rgba(79,139,255,.28), transparent 70%),
+      radial-gradient(800px 500px at 100% 40%, rgba(164,107,255,.14), transparent 70%),
+      radial-gradient(700px 500px at 0% 80%, rgba(255,122,182,.08), transparent 70%),
+      var(--bg);
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 40px 16px 64px; }
+
+  header { text-align: center; }
+  .avatar {
+    width: 148px; height: 148px; border-radius: 50%; display: block; margin: 0 auto 14px;
+    box-shadow: 0 0 0 3px rgba(79,139,255,.55), 0 0 40px rgba(79,139,255,.45);
+  }
+  h1 { font: 700 34px/1.1 Cinzel, Georgia, serif; margin: 0; letter-spacing: .5px; }
+  .tag { color: var(--muted); margin: 8px 0 0; }
+
+  h2 {
+    font: 600 18px/1.2 Cinzel, Georgia, serif; letter-spacing: .6px; margin: 44px 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  .platforms { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .pbtn {
+    display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px;
+    background: var(--panel); border: 1px solid var(--line); font-weight: 600; font-size: 14px;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .pbtn:hover { transform: translateY(-2px); border-color: rgba(120,140,255,.5); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+
+  .release {
+    display: grid; grid-template-columns: 180px 1fr; gap: 18px; padding: 16px; margin-bottom: 14px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+  }
+  .release img { width: 100%; aspect-ratio: 1; border-radius: 10px; object-fit: cover; }
+  .release h3 { margin: 2px 0 4px; font: 600 20px/1.2 Cinzel, Georgia, serif; }
+  .release .meta { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .4px; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px; background: rgba(164,107,255,.2); color: #d9c6ff; margin-left: 6px;
+    vertical-align: middle;
+  }
+  .main-btn {
+    display: inline-block; padding: 10px 16px; border-radius: 999px; font-weight: 600; margin: 0 6px 10px 0;
+    background: linear-gradient(90deg, var(--blue), var(--violet)); box-shadow: 0 4px 16px rgba(79,139,255,.35);
+  }
+  .main-btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--muted);
+  }
+  .chip:hover { color: var(--text); border-color: rgba(120,140,255,.5); }
+
+  .videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+  .vid { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: transform .15s; }
+  .vid:hover { transform: translateY(-3px); }
+  .vid img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  .vid div { padding: 10px 12px 12px; }
+  .vid b { display: block; font-size: 14px; }
+  .vid span { color: var(--muted); font-size: 12px; }
+
+  footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 12px; }
+
+  @media (max-width: 560px) {
+    .release { grid-template-columns: 1fr; }
+    .release img { max-width: 260px; margin: 0 auto; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="avatar" src="img/avatar.webp" alt="Samuraikid11">
+    <h1>Samuraikid11</h1>
+    <p class="tag">Epic fantasy &amp; anime story-songs ⚔️🎶</p>
+  </header>
+
+  <h2>Listen everywhere</h2>
+  <div class="platforms" id="platforms"></div>
+
+  <h2>Out on streaming</h2>
+  <div id="releases"></div>
+
+  <h2>Story-songs on YouTube</h2>
+  <div class="videos" id="videos"></div>
+
+  <footer>© Samuraikid11 · Songs made with Suno AI, lyrics &amp; artwork direction by Samuraikid11</footer>
+</div>
+
+<script>
+// ===== Update these lists when a new song comes out =====
+const ARTIST = "Samuraikid11";
+
+// Artist pages. Search links work right away; swap in the real artist links once you have them.
+const PLATFORMS = [
+  ["Spotify",       "#1ed760", "https://open.spotify.com/search/Samuraikid11/artists"],
+  ["Apple Music",   "#fa4b6b", "https://music.apple.com/us/search?term=Samuraikid11"],
+  ["YouTube Music", "#ff3b3b", "https://music.youtube.com/search?q=Samuraikid11"],
+  ["Amazon Music",  "#25d1da", "https://music.amazon.com/search/Samuraikid11"],
+  ["Deezer",        "#a238ff", "https://www.deezer.com/search/Samuraikid11"],
+  ["TIDAL",         "#ffffff", "https://tidal.com/search?q=Samuraikid11"],
+  ["YouTube",       "#ff0000", "https://www.youtube.com/@Samuraikid11"],
+  ["TikTok",        "#25f4ee", "https://www.tiktok.com/@samurai_kid11"],
+  ["Instagram",     "#e1306c", "https://www.instagram.com/samuraikid11music"],
+];
+
+// Songs released through DistroKid (newest first). hyperfollow = the DistroKid page with every store.
+const RELEASES = [
+  { title: "Arise on Halloween", cover: "img/arise-on-halloween.jpg", date: "Halloween 2026",
+    badge: "New", hyperfollow: "", youtube: "Wn-SJ0KZmco" },
+  { title: "Halloween Belongs to Us!", cover: "img/halloween-belongs-to-us.jpg", date: "Released Oct 27, 2026",
+    hyperfollow: "https://distrokid.com/hyperfollow/samuraikid11/halloween-belongs-to-us", youtube: "JlZl0hAcL1o" },
+];
+
+// YouTube videos (newest first): [title, video id, short note]
+const VIDEOS = [
+  ["Outside the Gate", "vAeUglFWSTE", "A hunter's song"],
+  ["One More Step", "jfGQIp9dxlQ", "Left to die in the dungeon"],
+  ["Beneath a Hungry Moon", "M5yVDjjFWAc", "Dark fantasy Halloween"],
+  ["Halloween Belongs to Us (Music Video)", "JlZl0hAcL1o", "Anime Halloween party"],
+  ["Two Souls, One Body", "HXALfCpc8cE", "Dark fantasy"],
+  ["A Hearth Worth Fighting For", "FquvMOyEyQ0", "Viking fantasy"],
+  ["One More Beam Before We Sleep", "6nkHztrWlJM", "A Valheim Viking song"],
+  ["Twelve Who Made a Promise", "1k41LtYxzcU", "Epic fantasy"],
+  ["When the Hollow Calls", "DpO4Syoozn4", "Spooky Halloween fantasy"],
+  ["The New Boy at Spellbound Hall", "izPtZ5sGyFA", "Cozy magic school"],
+  ["The Cursed Boy's Lullaby", "eDlPnBZyGdQ", "Dark fantasy"],
+  ["Until the Graves Are Empty", "cF8Oth-erPo", "Epic battle song"],
+  ["We All Come Home", "GWlWjfWJwsc", "Eight young mages, one beast"],
+  ["Behind Me", "5HFbpHSB-rw", "The youngest mage"],
+];
+// ========================================================
+
+const q = s => encodeURIComponent(s);
+const storeSearch = t => [
+  ["Spotify", `https://open.spotify.com/search/${q(t + " " + ARTIST)}`],
+  ["Apple Music", `https://music.apple.com/us/search?term=${q(t + " " + ARTIST)}`],
+  ["YouTube Music", `https://music.youtube.com/search?q=${q(t + " " + ARTIST)}`],
+  ["Amazon Music", `https://music.amazon.com/search/${q(t + " " + ARTIST)}`],
+  ["Deezer", `https://www.deezer.com/search/${q(t + " " + ARTIST)}`],
+  ["TIDAL", `https://tidal.com/search?q=${q(t + " " + ARTIST)}`],
+];
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+document.getElementById("platforms").innerHTML = PLATFORMS.map(([n, c, u]) =>
+  `<a class="pbtn" href="${u}" target="_blank" rel="noopener"><span class="dot" style="background:${c}"></span>${n}</a>`).join("");
+
+document.getElementById("releases").innerHTML = RELEASES.map(r => `
+  <div class="release">
+    <img src="${r.cover}" alt="${esc(r.title)} cover" loading="lazy">
+    <div>
+      <h3>${esc(r.title)}${r.badge ? `<span class="badge">${r.badge}</span>` : ""}</h3>
+      <div class="meta">${esc(r.date)}</div>
+      ${r.hyperfollow ? `<a class="main-btn" href="${r.hyperfollow}" target="_blank" rel="noopener">🎧 Listen on all platforms</a>` : ""}
+      ${r.youtube ? `<a class="main-btn ghost" href="https://youtu.be/${r.youtube}" target="_blank" rel="noopener">▶ Watch on YouTube</a>` : ""}
+      <div class="chips">${storeSearch(r.title).map(([n, u]) =>
+        `<a class="chip" href="${u}" target="_blank" rel="noopener">${n}</a>`).join("")}</div>
+    </div>
+  </div>`).join("");
+
+document.getElementById("videos").innerHTML = VIDEOS.map(([t, id, note]) => `
+  <a class="vid" href="https://youtu.be/${id}" target="_blank" rel="noopener">
+    <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy">
+    <div><b>${esc(t)}</b><span>${esc(note)}</span></div>
+  </a>`).join("");
+</script>
+</body>
+</html>
