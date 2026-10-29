@@ -140,13 +140,16 @@ const PLATFORMS = [
 // Songs released through DistroKid (newest first). hyperfollow = the DistroKid page with every store.
 const RELEASES = [
   { title: "Arise on Halloween", cover: "img/arise-on-halloween.jpg", date: "Halloween 2026",
-    badge: "New", hyperfollow: "", youtube: "Wn-SJ0KZmco" },
+    badge: "New", hyperfollow: "", youtube: "Wn-SJ0KZmco", from: "2026-10-31T15:00:00-04:00" },
   { title: "Halloween Belongs to Us!", cover: "img/halloween-belongs-to-us.jpg", date: "Released Oct 27, 2026",
     hyperfollow: "https://distrokid.com/hyperfollow/samuraikid11/halloween-belongs-to-us", youtube: "JlZl0hAcL1o" },
 ];
 
-// YouTube videos (newest first): [title, video id, short note]
+// YouTube videos (newest first): [title, video id, short note, optional "show from" date for scheduled videos]
 const VIDEOS = [
+  ["Arise on Halloween", "Wn-SJ0KZmco", "Epic Halloween anthem", "2026-10-31T15:00:00-04:00"],
+  ["The Ashen Lanterns", "fFzdVr5IXQk", "The true story of the Twelve", "2026-10-30T15:00:00-04:00"],
+  ["The Ones I Couldn't Save", "U1K8ukyHiGA", "A thousand shadows kneel", "2026-10-29T15:00:00-04:00"],
   ["Outside the Gate", "vAeUglFWSTE", "A hunter's song"],
   ["One More Step", "jfGQIp9dxlQ", "Left to die in the dungeon"],
   ["Beneath a Hungry Moon", "M5yVDjjFWAc", "Dark fantasy Halloween"],
@@ -164,6 +167,9 @@ const VIDEOS = [
 ];
 // ========================================================
 
+// Anything with a "show from" date stays hidden until that moment (scheduled releases).
+const isOut = from => !from || Date.now() >= Date.parse(from);
+
 const q = s => encodeURIComponent(s);
 const storeSearch = t => [
   ["Spotify", `https://open.spotify.com/search/${q(t + " " + ARTIST)}`],
@@ -178,7 +184,7 @@ const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&
 document.getElementById("platforms").innerHTML = PLATFORMS.map(([n, c, u]) =>
   `<a class="pbtn" href="${u}" target="_blank" rel="noopener"><span class="dot" style="background:${c}"></span>${n}</a>`).join("");
 
-document.getElementById("releases").innerHTML = RELEASES.map(r => `
+document.getElementById("releases").innerHTML = RELEASES.filter(r => isOut(r.from)).map(r => `
   <div class="release">
     <img src="${r.cover}" alt="${esc(r.title)} cover" loading="lazy">
     <div>
@@ -191,7 +197,7 @@ document.getElementById("releases").innerHTML = RELEASES.map(r => `
     </div>
   </div>`).join("");
 
-document.getElementById("videos").innerHTML = VIDEOS.map(([t, id, note]) => `
+document.getElementById("videos").innerHTML = VIDEOS.filter(v => isOut(v[3])).map(([t, id, note]) => `
   <a class="vid" href="https://youtu.be/${id}" target="_blank" rel="noopener">
     <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy">
     <div><b>${esc(t)}</b><span>${esc(note)}</span></div>
