@@ -1,4 +1,3 @@
-# Samuraikid11 – Music
+# Samuraikid11
 
-https://samuraikid11.github.io/ — links to every song on every platform.
-Edit the lists at the top of the script in index.html to add a song.
+This page now forwards to https://samuraikid11.com/
